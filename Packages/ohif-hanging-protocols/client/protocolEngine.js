@@ -256,9 +256,9 @@ HP.ProtocolEngine = class ProtocolEngine {
                     id: protocol.id
                 });
 
-                // If it is not already in the MatchedProtocols Collection, insert it
+                // If it is not already in the MatchedProtocols Collection, insert it with its score
                 if (!protocolInCollection) {
-                    MatchedProtocols.insert(protocol);
+                    MatchedProtocols.insert(matchedDetail);
                 }
             });
         });
@@ -281,7 +281,7 @@ HP.ProtocolEngine = class ProtocolEngine {
         }).fetch();
 
         // Return the highest scoring Protocol
-        return sorted[0];
+        return sorted[0].protocol;
     }
 
     /**
