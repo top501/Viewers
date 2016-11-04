@@ -250,6 +250,26 @@ Template.thumbnailEntry.helpers({
         return Template.instance().isDragAndDrop ? 'draggable' : '';
     },
     instanceNumber() {
-        return Template.instance().data.thumbnail.stack.images[0].instanceNumber;
+        const thumbnail = Template.instance().data.thumbnail;
+        if (!thumbnail) {
+            return;
+        }
+
+        const stack = thumbnail.stack;
+        if (!stack) {
+            return;
+        }
+
+        //  No need to show instance number for single-frame images
+        if (!stack.isMultiFrame) {
+            return;
+        }
+
+        const firstImage = stack.images[0];
+        if (!firstImage) {
+            return;
+        }
+
+        return firstImage.instanceNumber;
     }
 });
